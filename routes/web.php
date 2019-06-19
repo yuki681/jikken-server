@@ -14,3 +14,4 @@
 Route::get('/schedule/{id}', 'SchedulesController@show');
 Route::put('/schedule/{id}/soldout', 'SchedulesController@soldout');
 Route::put('/schedule/{id}/cancel_soldout', 'SchedulesController@cancel_soldout');
+Route::get('/index/{date?}', 'SchedulesController@index');
