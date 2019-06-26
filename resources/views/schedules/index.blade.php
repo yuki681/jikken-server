@@ -5,4 +5,5 @@
 @section('content')
   <h1>hello</h1>
   <h2>{{ $schedules }}</h2>
+  <h3>{{ $menus }}
 @endsection
