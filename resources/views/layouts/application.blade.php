@@ -39,6 +39,10 @@
         </style> 
     </head>
     <body>
+        <!-- @section('sidebar') -->
+            <!-- ここがメインのサイドバー -->
+        <!-- @show -->
+
         <div class="container">
             @yield('content')
         </div>
