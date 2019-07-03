@@ -1,16 +1,40 @@
-@extends('layouts.application')
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>メニュー一覧画面</title>
+    <!-- BootstrapのCSS読み込み -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery読み込み -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    
+    <script>
+      $( function() {
+        $( "#datepicker" ).datepicker();
+      } );
+    </script>
+    
+    <!-- BootstrapのJS読み込み -->
+    <script src="js/bootstrap.min.js"></script>
+  
+    <style>
+      /*div {
+        border: 1px solid #000000;
+      }*/
+    </style> 
+  </head>
 
-@section('title', 'メニュー一覧画面')
-
-@section('content')
+  <body>
     <div class="container">
       <!--ヘッダ的なやつ-->
       <div class="row">
         <div class="col-8 align-self-center">
-          <h4>明石高専学生食堂システム</h4>
+          <p class="h4" style="margin: 5px 0px 0px 0px">明石高専学生食堂システム</p>
         </div>
         <div class="col-4">
-          <nav aria-label="Page navigation example">
+          <nav aria-label="Page navigation example" style="margin: 0px 0px -16px 0px">
             <ul class="pagination justify-content-center">
               <li class="page-item">
                 <a class="page-link" href="/index?date={{$date_before}}" aria-label="Previous">
@@ -27,7 +51,7 @@
           </nav> 
         </div>
       </div>
-      <hr>
+      <hr color="black" style="margin:6px 0px 6px 0px">
       <!--1つのかたまり-->
       <div class="row">
         <div class="col-6">
@@ -36,9 +60,8 @@
           </div>
           <div class="row">
             <div class="col-12 align-self-center">
-              <p class="h4"><b>
-                <a href="file:///home1/home-e/e1511/%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97/jikken-server/markup/detail.html?">アジフライおろしポン酢</a>
-                <!--font color="#000099"><u><b>アジフライおろしポン酢</b></u></font-->
+              <p class="h4" style="margin-top: 10px"><b>
+                <a href="schedule/{{$a_menu->id}}">{{$a_menu->name}}</a>                <!--font color="#000099"><u><b>アジフライおろしポン酢</b></u></font-->
               </b></p>
             </div>
           </div>
@@ -50,20 +73,23 @@
           <div class="row h-50">
             <div class="col-6 align-self-center" style="text-align:center">販売価格（税込）</div>
             <div class="col-6 align-self-center" style="text-align:center">
-              <p class="h4"><b>￥420</b></p>
+              <p class="h4" style="margin-top: 10px"><b>￥{{$a_menu->price}}</b></p>
             </div>
           </div>
+          <hr style="margin: 0px 0px 0px 0px">
           <div class="row h-50">
+            <div class="col-6 align-self-center" style="text-align:center">販売状況</div>
             <div class="col-6 align-self-center" style="text-align:center">
-                販売状況
-            </div>
-            <div class="col-6 align-self-center" style="text-align:center">
-              <p class="h4"><font color="#228B22"><strong>販売中</strong></font></p>
+              <?php if(is_null($a_menu->sold_time)): ?>
+                <p class="h4" style="margin-top: 10px"><font color="#228B22"><strong>販売中</strong></font></p>
+              <?php else: ?>
+                <p class="h4" style="margin-top: 10px"><font color="#ff0000"><strong>売り切れ</strong></font></p>
+              <?php endif; ?>
             </div>
           </div>
         </div>
       </div>
-      <hr>
+      <hr color="black" style="margin:6px 0px 6px 0px">
 
       <!--1つのかたまり-->
       <div class="row">
@@ -73,7 +99,8 @@
           </div>
           <div class="row">
             <div class="col-12 align-self-center">
-              <p class="h4"><font color="#000099"><u><b>豚焼き肉丼</b></u></font></p>
+              <p class="h4" style="margin-top: 10px"><b><a href="schedule/{{$b_menu->id}}">{{$b_menu->name}}</a></b>
+              </p>
             </div>
           </div>
           <div class="row">
@@ -84,53 +111,62 @@
           <div class="row h-50">
             <div class="col-6 align-self-center" style="text-align:center">販売価格（税込）</div>
             <div class="col-6 align-self-center" style="text-align:center">
-              <p class="h4"><b>￥360</b></p>
+              <p class="h4" style="margin-top: 10px"><b>￥{{$b_menu->price}}</b></p>
             </div>
           </div>
+          <hr style="margin: 0px 0px 0px 0px">
           <div class="row h-50">
+            <div class="col-6 align-self-center" style="text-align:center">販売状況</div>
             <div class="col-6 align-self-center" style="text-align:center">
-                販売状況
-            </div>
-            <div class="col-6 align-self-center" style="text-align:center">
-              <p class="h4"><font color="#ff0000"><strong>売り切れ</strong></font></p>
+              <?php if(is_null($b_menu->sold_time)): ?>
+                <p class="h4" style="margin-top: 10px"><font color="#228B22"><strong>販売中</strong></font></p>
+              <?php else: ?>
+                <p class="h4" style="margin-top: 10px"><font color="#ff0000"><strong>売り切れ</strong></font></p>
+              <?php endif; ?>
             </div>
           </div>
         </div>
       </div>
-      <hr>
+      <hr color="black" style="margin:6px 0px 6px 0px">
 
       <!--1つのかたまり-->
       <div class="row">
-        <div class="col-6">
-          <div class="row">
-            <div class="col-12 align-self-center">常設メニュー</div>
-          </div>
-          <div class="row">
-            <div class="col-12 align-self-center">
-              <p class="h4"><font color="#000099"><u><b>カレーライス</b></u></font></p>
+        <?php foreach($menus as $menu): ?>
+          <div class="col-6">
+            <div class="row">
+              <div class="col-12 align-self-center">常設メニュー</div>
+            </div>
+            <div class="row">
+              <div class="col-12 align-self-center">
+                <p class="h4" style="margin-top: 10px"><font color="#000099"><u><b><a href="schedule/{{$menu->id}}">{{$menu->name}}</a></b></u></font></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 align-self-center">レビュー：★★★☆☆</div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-12 align-self-center">レビュー：★★★☆☆</div>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="row h-50">
-            <div class="col-6 align-self-center" style="text-align:center">販売価格（税込）</div>
-            <div class="col-6 align-self-center" style="text-align:center">
-              <p class="h4"><b>￥290</b></p>
+          <div class="col-6">
+            <div class="row h-50">
+              <div class="col-6 align-self-center" style="text-align:center">販売価格（税込）</div>
+              <div class="col-6 align-self-center" style="text-align:center">
+                <p class="h4" style="margin-top: 10px"><b>￥{{$menu->price}}</b></p>
+              </div>
+            </div>
+            <hr style="margin: 0px 0px 0px 0px">
+            <div class="row h-50">
+              <div class="col-6 align-self-center" style="text-align:center">販売状況</div>
+              <div class="col-6 align-self-center" style="text-align:center">
+                <?php if(is_null($a_menu->sold_time)): ?>
+                  <p class="h4" style="margin-top: 10px"><font color="#228B22"><strong>販売中</strong></font></p>
+                <?php else: ?>
+                  <p class="h4" style="margin-top: 10px"><font color="#ff0000"><strong>売り切れ</strong></font></p>
+                <?php endif; ?>
+              </div>
             </div>
           </div>
-          <div class="row h-50">
-            <div class="col-6 align-self-center" style="text-align:center">
-                販売状況
-            </div>
-            <div class="col-6 align-self-center" style="text-align:center">
-              <p class="h4"><font color="#228b22"><strong>販売中</strong></font></p>
-            </div>
-          </div>
-        </div>
+        <?php endforeach; ?>
       </div>
-      <hr>
-</div>
-@endsection
+      <hr color="black" style="margin:6px 0px 6px 0px">
+    </div>
+  </body>
+</html>
