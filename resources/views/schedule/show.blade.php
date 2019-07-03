@@ -1,10 +1,3 @@
-<!--<html>
-    <body>
-        <p>{{$menu['name']}}</p>
-    </body>
-</html>
---> 
-
 @extends('../layouts/app')
 @section('title', '詳細画面')
 
@@ -14,7 +7,7 @@
         <div class="col-8 align-self-center">
             <h4>明石高専学生食堂システム</h4>
         </div>
-        {{-- <div class="col-4">
+        <div class="col-4">
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
                 <li class="page-item">
@@ -22,7 +15,7 @@
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">2019年6月12日</a></li>
+                <li class="page-item"><a class="page-link" href="#">{{ $schedule->date->format('Y年n月j日') }}</a></li>
                 <li class="page-item">
                     <a class="page-link" href="#" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
@@ -30,7 +23,7 @@
                 </li>
                 </ul>
             </nav> 
-        </div> --}}
+        </div>
     </div>
     <hr>
         <a href="{{ url ('/schedules/') }}">メニュー一覧に戻る</a>
@@ -38,21 +31,38 @@
     <!--メニュー名や価格-->
     <div class="row">
         <div class="col-7">
-        <div class="row">
-            <!-- <div class="col-12 align-self-center">☆日替わりメニュー　Aセット</div> -->
-        </div>
+
         <div class="row">
             <div class="col-12 align-self-center">
-            <p class="h4"><font color="#000099"><b>{{ $menu->name }}</b></font></p>
+                @switch($schedule->type)
+                    @case('A')
+                        日替わりメニュー　Aセット
+                        @break
+                    @case('B')
+                        日替わりメニュー　Bセット
+                        @break
+                    @default
+                        常設メニュー
+                @endswitch
             </div>
         </div>
+
         <div class="row">
-            <!-- <div class="col-12 align-self-center">ライス・味噌汁付き</div> -->
+            <div class="col-12 align-self-center">
+            <p class="h4"><font color="#000099"><b>{{ $schedule->name }}</b></font></p>
+            </div>
         </div>
+
+        @if($schedule->type == 'A')
+            <div class="row">
+                <div class="col-12 align-self-center">ライス・味噌汁付き</div>
+            </div>
+        @endif
+
         </div>
         <div class="col-3 text-center align-self-center">販売価格（税込）</div>
             <div class="col-2 text-center align-self-center">
-                <h4><b>￥{{ $menu->price }}</b></h4>
+                <h4><b>￥{{ $schedule->price }}</b></h4>
             </div>
         </div>
     <hr>
@@ -71,27 +81,41 @@
                 <th>塩分</th>
             </tr>
             <tr>
-                <td>{{ $menu->energy }}kcal</td>
-                <td>{{ $menu->protein }}g</td>
-                <td>{{ $menu->lipid }}g</td>
-                <td>{{ $menu->salt }}g</td>
+                <td>{{ $schedule->energy }}kcal</td>
+                <td>{{ $schedule->protein }}g</td>
+                <td>{{ $schedule->lipid }}g</td>
+                <td>{{ $schedule->salt }}g</td>
             </tr>
             </table>
         </div>
         </div>
     </div>
-    <hr>     
+    <hr>
+
     <!--販売状況-->
     <div class="row">
         <div class="col-4 align-self-center">販売状況</div>
+            <div class="col-4 text-center align-self-center">
+                <p class="h4">
+                    @if($schedule->date == now())
+                        @if(is_null($schedule->sold_time))
+                            <font color="green"><b>販売中</b></font>
+                        @else
+                            <font color="red"><b>売り切れ</b></font>
+                        @endif
+                    @elseif($schedule->date > now())
+                        <font color="gray"><b>販売開始前</b></font>
+                    @else
+                        <font color="gray"><b>販売終了</b></font>
+                    @endif
+                </p>
+            </div>
         <div class="col-4 text-center align-self-center">
-        <p class="h4"><font color="green"><b>☆販売中</b></font></p>
-        </div>
-        <div class="col-4 text-center align-self-center">
-        <button type="button" class="btn btn-outline-danger">売り切れにする</button>
+            <button type="button" class="btn btn-outline-danger">売り切れにする</button>
         </div>
     </div>
     <hr>
+
     <!--レビュー-->
     <div class="row">
         <div class="col-12">
