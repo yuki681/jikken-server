@@ -12,47 +12,49 @@
     <!--ヘッダ的なやつ-->
     <div class="row">
         <div class="col-8 align-self-center">
-        <h4>明石高専学生食堂システム</h4>
+            <h4>明石高専学生食堂システム</h4>
         </div>
-        <div class="col-4">
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">2019年6月12日</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-            </ul>
-        </nav> 
-        </div>
+        {{-- <div class="col-4">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">2019年6月12日</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                </ul>
+            </nav> 
+        </div> --}}
     </div>
     <hr>
-    <a href="file:///home1/home-e/e1511/%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97/jikken-server/markup/list.html">メニュー一覧に戻る</a>
+        <a href="{{ url ('/schedules/') }}">メニュー一覧に戻る</a>
     <hr>
     <!--メニュー名や価格-->
     <div class="row">
         <div class="col-7">
         <div class="row">
-            <div class="col-12 align-self-center">日替わりメニュー　Aセット</div>
+            <!-- <div class="col-12 align-self-center">☆日替わりメニュー　Aセット</div> -->
         </div>
         <div class="row">
             <div class="col-12 align-self-center">
-            <p class="h4"><font color="#000099"><b>アジフライおろしポン酢</b></font></p>
+            <p class="h4"><font color="#000099"><b>{{ $menu->name }}</b></font></p>
             </div>
         </div>
         <div class="row">
-            <div class="col-12 align-self-center">ライス・味噌汁付き</div>
+            <!-- <div class="col-12 align-self-center">ライス・味噌汁付き</div> -->
         </div>
         </div>
         <div class="col-3 text-center align-self-center">販売価格（税込）</div>
-        <div class="col-2 text-center align-self-center"><h4><b>￥420</b></h4></div>
-    </div>
+            <div class="col-2 text-center align-self-center">
+                <h4><b>￥{{ $menu->price }}</b></h4>
+            </div>
+        </div>
     <hr>
     <!--栄養価表示-->
     <div class="row">
@@ -69,10 +71,10 @@
                 <th>塩分</th>
             </tr>
             <tr>
-                <td>725kcal</td>
-                <td>25.0g</td>
-                <td>19.4g</td>
-                <td>3.7g</td>
+                <td>{{ $menu->energy }}kcal</td>
+                <td>{{ $menu->protein }}g</td>
+                <td>{{ $menu->lipid }}g</td>
+                <td>{{ $menu->salt }}g</td>
             </tr>
             </table>
         </div>
@@ -83,7 +85,7 @@
     <div class="row">
         <div class="col-4 align-self-center">販売状況</div>
         <div class="col-4 text-center align-self-center">
-        <p class="h4"><font color="green"><b>販売中</b></font></p>
+        <p class="h4"><font color="green"><b>☆販売中</b></font></p>
         </div>
         <div class="col-4 text-center align-self-center">
         <button type="button" class="btn btn-outline-danger">売り切れにする</button>
