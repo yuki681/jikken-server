@@ -19,7 +19,6 @@ class CreateReviewsTable extends Migration
             $table->text('message');
             $table->integer('reputation');
             $table->string('author_name',100);
-            $table->timestamps('posted_time');
 
             $table->foreign('menu_id')->references('id')->on('menus');
         });
