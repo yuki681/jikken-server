@@ -11,5 +11,5 @@
 |
 */
 
-Route::get('/schedule/{id}', 'Schedulescontroller@show');
+Route::get('/schedule/{id}', 'SchedulesController@show');
 

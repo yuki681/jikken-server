@@ -11,8 +11,6 @@ class MenusTableSeeder extends Seeder
      */
     public function run()
     {
-        if (App::environment('local')){
-
             $file = new SplFileObject('database/csv/menus.csv');
             $file->setFlags(
                 \SplFileObject::READ_CSV |
@@ -42,7 +40,5 @@ class MenusTableSeeder extends Seeder
                 
                 DB::table("schedules")->insert($schedule_list);
             }
-        }
-        
     }
 }
