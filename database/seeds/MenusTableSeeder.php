@@ -22,7 +22,7 @@ class MenusTableSeeder extends Seeder
             );
             $list = [];
             foreach($file as $line) {
-                $menu_list[] = [
+                $menu_list = [
                     "name" => $line[0],
                     "price" => $line[1],
                     "energy" => $line[2],
@@ -34,7 +34,7 @@ class MenusTableSeeder extends Seeder
                 DB::table("menus")->insert($menu_list);
                 $last_menu_id = DB::getPdo()->lastInsertId();
 
-                $schedule_list[] = [
+                $schedule_list = [
                     "menu_id" => $last_menu_id,
                     "date" => $line[6],
                     "type" => $line[7],
