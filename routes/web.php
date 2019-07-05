@@ -12,4 +12,4 @@
 */
 
 Route::get('/schedule/{id}', 'SchedulesController@show');
-
+Route::put('/schedule/{id}/soldout', 'SchedulesController@soldout');
