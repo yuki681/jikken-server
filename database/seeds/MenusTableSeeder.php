@@ -11,34 +11,33 @@ class MenusTableSeeder extends Seeder
      */
     public function run()
     {
-            $file = new SplFileObject('database/csv/menus.csv');
-            $file->setFlags(
-                \SplFileObject::READ_CSV |
-                \SplFileObject::READ_AHEAD |
-                \SplFileObject::SKIP_EMPTY |
-                \SplFileObject::DROP_NEW_LINE
-            );
-            $list = [];
-            foreach($file as $line) {
-                $menu_list = [
-                    "name" => $line[0],
-                    "price" => $line[1],
-                    "energy" => $line[2],
-                    "protein" => $line[3],
-                    "lipid" => $line[4],
-                    "salt" => $line[5],
-                ];
+        $ab_text = file_get_contents("database/seeds/201907_ab.json");
+        $ab_menus = json_decode($ab_text, true);
 
-                DB::table("menus")->insert($menu_list);
-                $last_menu_id = DB::getPdo()->lastInsertId();
+        foreach($ab_menus as $menu){
+            DB::table("menus")->insert($menu['menu']);
+            $menu_id = DB::getPdo()->lastInsertId();
+            $menu['schedule']['menu_id'] = $menu_id;
+            DB::table("schedules")->insert($menu['schedule']);
+        }
 
-                $schedule_list = [
-                    "menu_id" => $last_menu_id,
-                    "date" => $line[6],
-                    "type" => $line[7],
+        $weekly_text = file_get_contents("database/seeds/201907_weekly.json");
+        $weekly_menus = json_decode($weekly_text, true);
+
+        foreach($weekly_menus as $menu){
+            DB::table("menus")->insert($menu['menu']);
+            $menu_id = DB::getPdo()->lastInsertId();
+
+            $schedules = [];
+            foreach($menu['dates'] as $date){
+                $schedules[] = [
+                    'menu_id' => $menu_id,
+                    'type' => 'N',
+                    'date' => $date
                 ];
-                
-                DB::table("schedules")->insert($schedule_list);
             }
+            DB::table("schedules")->insert($schedules);
+        }
+
     }
 }
