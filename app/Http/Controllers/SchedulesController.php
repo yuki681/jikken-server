@@ -52,8 +52,10 @@ class SchedulesController extends Controller
       $date = $_GET["date"];
     }
     $menus = \App\Schedule::where('date', '=', $date)->leftjoin('menus', 'schedules.menu_id', '=', 'menus.id')->get();
-    $date_before = date("Y-n-j", strtotime($date.'-1day'));
-    $date_after = date("Y-n-j", strtotime($date.'+1day'));
+    $date_before = date("Y-m-d", strtotime($date.'-1day'));
+    $date_after = date("Y-m-d", strtotime($date.'+1day'));
+    $a_menu = new \App\Schedule();
+    $b_menu = new \App\Schedule();
     foreach ($menus as $menu) {
       switch($menu->type){
         case "A":
@@ -61,7 +63,9 @@ class SchedulesController extends Controller
           break;
         case "B":
           $b_menu = $menu;
-        break;
+          break;
+        default:
+
       }
     }
 

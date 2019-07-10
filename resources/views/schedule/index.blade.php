@@ -11,13 +11,13 @@
           <nav aria-label="Page navigation example" style="margin: 0px 0px -16px 0px">
             <ul class="pagination justify-content-center">
               <li class="page-item">
-                <a class="page-link" href="/index?date={{$date_before}}" aria-label="Previous">
+                <a class="page-link" href="/schedule?date={{$date_before}}" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
               <li class="page-item"><a class="page-link" href="#">{{ $date }}</a></li>
               <li class="page-item">
-                <a class="page-link" href="/index?date={{$date_after}}" aria-label="Next">
+                <a class="page-link" href="/schedule?date={{$date_after}}" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
                 </a>
               </li>
@@ -40,7 +40,19 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12 align-self-center">レビュー：★★★★★</div>
+            <div class="col-12 align-self-center">レビュー：
+              <?php if($a_menu->getMeansReputation() != NULL): ?>
+                <?php for($i = 0; $i < 5;$i++):?>
+                  <?php if(floor($a_menu->getMeansReputation()) < $i):?>
+                    ★
+                  <?php else:?>
+                    ☆
+                  <?php endif;?>
+                <?php endfor; ?>
+                </div>
+              <?php else:?>
+                まだ評価されてません</div>
+              <?php endif;?>
           </div>
         </div>
         <div class="col-6">
@@ -54,11 +66,17 @@
           <div class="row h-50">
             <div class="col-6 align-self-center" style="text-align:center">販売状況</div>
             <div class="col-6 align-self-center" style="text-align:center">
-              <?php if(is_null($a_menu->sold_time)): ?>
-                <p class="h4" style="margin-top: 10px"><font color="#228B22"><strong>販売中</strong></font></p>
-              <?php else: ?>
-                <p class="h4" style="margin-top: 10px"><font color="#ff0000"><strong>売り切れ</strong></font></p>
-              <?php endif; ?>
+              <?php if($date == date("Y-m-d")): ?>
+                <?php if(is_null($a_menu->sold_time)): ?>
+                  <p class="h4" style="margin-top: 10px"><font color="#228B22"><strong>販売中</strong></font></p>
+                <?php else: ?>
+                  <p class="h4" style="margin-top: 10px"><font color="#ff0000"><strong>売り切れ</strong></font></p>
+                <?php endif;?>
+              <?php elseif($date > date("Y-m-d")): ?>
+                <p class="h4"style="margin-top: 10px"><font color="#808080">販売前<strong></strong></font></p>
+              <?php else:?>
+                <p class="h4"style="margin-top: 10px"><font color="#808080">販売終了<strong></strong></font></p>
+              <?php endif;?>
             </div>
           </div>
         </div>
@@ -78,7 +96,19 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12 align-self-center">レビュー：★★★★☆</div>
+            <div class="col-12 align-self-center">レビュー：
+              <?php if($b_menu->getMeansReputation() != NULL): ?>
+                <?php for($i = 0; $i < 5;$i++):?>
+                  <?php if(floor($b_menu->getMeansReputation()) < $i):?>
+                    ★
+                  <?php else:?>
+                    ☆
+                  <?php endif;?>
+                <?php endfor; ?>
+                </div>
+              <?php else:?>
+                まだ評価されてません</div>
+              <?php endif;?>
           </div>
         </div>
         <div class="col-6">
@@ -92,10 +122,16 @@
           <div class="row h-50">
             <div class="col-6 align-self-center" style="text-align:center">販売状況</div>
             <div class="col-6 align-self-center" style="text-align:center">
-              <?php if(is_null($b_menu->sold_time)): ?>
-                <p class="h4" style="margin-top: 10px"><font color="#228B22"><strong>販売中</strong></font></p>
-              <?php else: ?>
-                <p class="h4" style="margin-top: 10px"><font color="#ff0000"><strong>売り切れ</strong></font></p>
+              <?php if($date == date("Y-m-d")): ?>              
+                <?php if(is_null($b_menu->sold_time)): ?>
+                  <p class="h4" style="margin-top: 10px"><font color="#228B22"><strong>販売中</strong></font></p>
+                <?php else: ?>
+                  <p class="h4" style="margin-top: 10px"><font color="#ff0000"><strong>売り切れ</strong></font></p>
+                <?php endif;?>
+              <?php elseif($date > date("Y-m-d")): ?>
+                <p class="h4"style="margin-top: 10px"><font color="#808080">販売前<strong></strong></font></p>
+              <?php else:?>
+                <p class="h4"style="margin-top: 10px"><font color="#808080">販売終了<strong></strong></font></p>
               <?php endif; ?>
             </div>
           </div>
@@ -116,7 +152,19 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-12 align-self-center">レビュー：★★★☆☆</div>
+              <div class="col-12 align-self-center">レビュー：
+              <?php if($menu->getMeansReputation() != NULL): ?>
+                <?php for($i = 0; $i < 5;$i++):?>
+                  <?php if(floor($menu->getMeansReputation()) < $i):?>
+                    ★
+                  <?php else:?>
+                    ☆
+                  <?php endif;?>
+                <?php endfor; ?>
+                </div>
+              <?php else:?>
+                まだ評価されてません</div>
+              <?php endif;?>
             </div>
           </div>
           <div class="col-6">
@@ -130,10 +178,16 @@
             <div class="row h-50">
               <div class="col-6 align-self-center" style="text-align:center">販売状況</div>
               <div class="col-6 align-self-center" style="text-align:center">
-                <?php if(is_null($a_menu->sold_time)): ?>
-                  <p class="h4" style="margin-top: 10px"><font color="#228B22"><strong>販売中</strong></font></p>
-                <?php else: ?>
-                  <p class="h4" style="margin-top: 10px"><font color="#ff0000"><strong>売り切れ</strong></font></p>
+                <?php if($date == date("Y-m-d")): ?>
+                  <?php if(is_null($menu->sold_time)): ?>
+                    <p class="h4" style="margin-top: 10px"><font color="#228B22"><strong>販売中</strong></font></p>
+                  <?php else: ?>
+                    <p class="h4" style="margin-top: 10px"><font color="#ff0000"><strong>売り切れ</strong></font></p>
+                  <?php endif;?>
+                <?php elseif($date > date("Y-m-d")): ?>
+                  <p class="h4"style="margin-top: 10px"><font color="#808080">販売前<strong></strong></font></p>
+                <?php else:?>
+                  <p class="h4"style="margin-top: 10px"><font color="#808080">販売終了<strong></strong></font></p>
                 <?php endif; ?>
               </div>
             </div>
