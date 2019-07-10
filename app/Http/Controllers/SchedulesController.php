@@ -28,4 +28,21 @@ class SchedulesController extends Controller
             return redirect("/schedule/{$id}")->with('status', 'failed');
         }
     }
+
+    public function cancel_soldout($id){
+        $schedule = Schedule::findOrFail($id);
+
+        if($schedule->is_sold_out){
+            $schedule->sold_time = null;
+            if($schedule->save()){
+                return redirect("/schedule/{$id}")->with('status', 'success');
+            }
+            else{
+                return redirect("/schedule/{$id}")->with('status', 'failed');
+            }
+        }
+        else{
+            return redirect("/schedule/{$id}")->with('status', 'failed');
+        }
+    }
 }
