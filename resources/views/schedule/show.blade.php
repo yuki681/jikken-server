@@ -28,6 +28,7 @@
     <hr>
         <a href="{{ url ('/schedules/') }}">メニュー一覧に戻る</a>
     <hr>
+
     <!--メニュー名や価格-->
     <div class="row">
         <div class="col-7">
@@ -53,11 +54,18 @@
             </div>
         </div>
 
-        @if($schedule->type == 'A')
-            <div class="row">
-                <div class="col-12 align-self-center">ライス・味噌汁付き</div>
+        <div class="row">
+            <div class="col-12 align-self-center">
+                @switch($schedule->type)
+                    @case('A')
+                        ライス・味噌汁付き
+                        @break
+                    @case('B')
+                        味噌汁付き
+                        @break
+                @endswitch
             </div>
-        @endif
+        </div>
 
         </div>
         <div class="col-3 text-center align-self-center">販売価格（税込）</div>
@@ -66,6 +74,7 @@
             </div>
         </div>
     <hr>
+
     <!--栄養価表示-->
     <div class="row">
         <div class="col-12">
@@ -97,13 +106,13 @@
         <div class="col-4 align-self-center">販売状況</div>
             <div class="col-4 text-center align-self-center">
                 <p class="h4">
-                    @if($schedule->date == now())
-                        @if(is_null($schedule->sold_time))
+                    @if($schedule->date->isToday())
+                        @if($schedule->is_on_sale)
                             <font color="green"><b>販売中</b></font>
                         @else
                             <font color="red"><b>売り切れ</b></font>
                         @endif
-                    @elseif($schedule->date > now())
+                    @elseif($schedule->date->isFuture())
                         <font color="gray"><b>販売開始前</b></font>
                     @else
                         <font color="gray"><b>販売終了</b></font>
@@ -111,7 +120,21 @@
                 </p>
             </div>
         <div class="col-4 text-center align-self-center">
-            <button type="button" class="btn btn-outline-danger">売り切れにする</button>
+            @if($schedule->date->isToday())
+                @if($schedule->is_on_sale)
+                    <form action="{{ url("/schedule/{$schedule->id}/soldout") }}" method="post">
+                        {{ csrf_field() }}
+                        {{ method_field('PUT') }}
+                        <button type="submit" class="btn btn-outline-danger">売り切れにする</button>
+                    </form>
+                @else
+                    <form action="{{ url("/schedule/{$schedule->id}/cancel_soldout") }}" method="post">
+                        {{ csrf_field() }}
+                        {{ method_field('PUT') }}
+                        <button type="submit" class="btn btn-outline-danger">販売中に戻す</button>
+                    </form>
+                @endif
+            @endif
         </div>
     </div>
     <hr>
