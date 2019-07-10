@@ -107,7 +107,7 @@
             <div class="col-4 text-center align-self-center">
                 <p class="h4">
                     @if($schedule->date->isToday())
-                        @if(is_null($schedule->sold_time))
+                        @if($schedule->is_on_sale)
                             <font color="green"><b>販売中</b></font>
                         @else
                             <font color="red"><b>売り切れ</b></font>

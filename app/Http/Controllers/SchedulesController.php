@@ -15,7 +15,7 @@ class SchedulesController extends Controller
     public function soldout($id){
         $schedule = Schedule::findOrFail($id);
         
-        if(is_null($schedule->sold_time)){
+        if($schedule->is_on_sale){
             $schedule->sold_time = now();
             if($schedule->save()){
                 return redirect("/schedule/{$id}")->with('status', 'success');
