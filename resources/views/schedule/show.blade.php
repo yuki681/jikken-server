@@ -122,13 +122,13 @@
         <div class="col-4 text-center align-self-center">
             @if($schedule->date->isToday())
                 @if($schedule->is_on_sale)
-                    <form action="{{ url("/schedule/{$schedule->id}/soldout") }}" method="post">
+                    <form style="margin-block-end: 0em" action="{{ url("/schedule/{$schedule->id}/soldout") }}" method="post" >
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <button type="submit" class="btn btn-outline-danger">売り切れにする</button>
                     </form>
                 @else
-                    <form action="{{ url("/schedule/{$schedule->id}/cancel_soldout") }}" method="post">
+                    <form style="margin-block-end: 0em" action="{{ url("/schedule/{$schedule->id}/cancel_soldout") }}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <button type="submit" class="btn btn-outline-success">販売中に戻す</button>
