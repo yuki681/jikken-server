@@ -64,6 +64,7 @@ class SchedulesController extends Controller
         break;
       }
     }
+
     $menus = $menus->where("id", "!=", $a_menu->id)->where("id", "!=", $b_menu->id);
     return view('schedules.index', compact('menus', 'a_menu', 'b_menu', 'date', 'date_before', 'date_after'));
   }
