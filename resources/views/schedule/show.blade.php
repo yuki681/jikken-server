@@ -5,10 +5,10 @@
     <!--ヘッダ的なやつ-->
     <div class="row">
         <div class="col-8 align-self-center">
-            <h4 style="margin: 5px 0px 0px 0px">明石高専学生食堂システム</h4>
+            <p class="h4" style="margin: 5px 0px 0px 0px">明石高専学生食堂システム</p>
         </div>
         <div class="col-4">
-            <nav aria-label="Page navigation example">
+            <nav aria-label="Page navigation example" style="margin:0px 0px -16px 0px">
                 <ul class="pagination justify-content-center">
                 <li class="page-item">
                     <a class="page-link" href="#" aria-label="Previous">
@@ -50,7 +50,7 @@
 
         <div class="row">
             <div class="col-12 align-self-center">
-            <h4><font color="#000099"><b>{{ $schedule->name }}</b></font></h4>
+                <p class="h4" style="margin-top: 10px"><font color="#000099"><b>{{ $schedule->name }}</b></font></p>
             </div>
         </div>
 
@@ -70,7 +70,7 @@
         </div>
         <div class="col-3 text-center align-self-center">販売価格（税込）</div>
             <div class="col-2 text-center align-self-center">
-                <h4 style="margin-top:10px"><b>￥{{ $schedule->price }}</b></h4>
+                <h4 style="margin-top: 10px"><b>￥{{ $schedule->price }}</b></h4>
             </div>
         </div>
     <hr color="black" style="margin:6px 0px 6px 0px">
@@ -105,7 +105,7 @@
     <div class="row">
         <div class="col-4 align-self-center">販売状況</div>
             <div class="col-4 text-center align-self-center">
-                <h4 style="margin-top:10px">
+                <p class="h4" style="margin-top: 10px">
                     @if($schedule->date->isToday())
                         @if($schedule->is_on_sale)
                             <font color="green"><b>販売中</b></font>
@@ -117,7 +117,7 @@
                     @else
                         <font color="gray"><b>販売終了</b></font>
                     @endif
-                </h4>
+                </p>
             </div>
         <div class="col-4 text-center align-self-center">
             @if($schedule->date->isToday())
