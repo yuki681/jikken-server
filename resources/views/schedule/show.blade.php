@@ -148,20 +148,24 @@
         </div>
         <hr style="border:none;border-top:dashed 1px #d3d3d3;height:1px;color:#FFFFFF;">
         
-        <div class="row">
-            <div class="col-8 align-self-center">明石　太郎さんの満足度：★★★★★</div>
-            <div class="col-4 text-right align-self-center"><font color="gray">2019年2月3日</font></div>
-        </div>
-        <div class="row">
-            <div class="col-12 align-self-center">
-            美味しかったです。この価格でこのボリュームはお得だと思います。
+        @foreach ($schedule->menu->reviews as $review)
+            <div class="row">
+                <div class="col-8 align-self-center">{{ $review->author_name }}さんの満足度：★★★★★</div>
+                <div class="col-4 text-right align-self-center"><font color="gray">{{ $review->updated_at->format('Y年n月j日') }}</font></div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-12 align-self-center">
+                    {{ $review->message }}
+                </div>
+            </div>
 
-        <hr style="border:none;border-top:dashed 1px #d3d3d3;height:1px;color:#FFFFFF;">
+            <hr style="border:none;border-top:dashed 1px #d3d3d3;height:1px;color:#FFFFFF;">
+        @endforeach
+
         <div class="row">
             <div class="col-8">
             <form>
+            {{-- <form action="{{ url("/review/create") }}" method="post"> --}}
                 <div class="form-group">
                 <label for="exampleInputEmail1">名前を書く</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="名前を入力…">
@@ -169,7 +173,7 @@
             </form>
             </div>
             <div class="col-4 align-self-center">
-            <p>満足度（選択できるようにする）</p>
+                <p>満足度（選択できるようにする）</p>
             <p style="text-align: center">☆☆☆☆☆</p>
             </div>
         </div>
