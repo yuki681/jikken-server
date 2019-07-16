@@ -120,9 +120,7 @@
 					</div>
 				</div>
 			</div>
-			@if(in_array($menu->type,['A', 'B']))
-				<hr color="black" style="margin:6px 0px 6px 0px">
-			@endif
+			<hr color="black" style="margin:6px 0px 6px 0px">
 		@endforeach
 		@else
 			<div class="row">
