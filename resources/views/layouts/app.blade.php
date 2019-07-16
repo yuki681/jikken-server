@@ -10,7 +10,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
+        
+        <!-- Add icon library -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
+        <!--満足度の星--> 
+        <link rel="stylesheet" href="{{asset('css/style.css')}}"> 
 
         <script>
         $( function() {
@@ -19,29 +23,35 @@
         </script>
 
         <style>
-            /* div {
-                <!--border: 1px solid #000000;-->
-            } */
+            /*div {
+                border: 1px solid #000000;
+            }*/
+
+            /*table関連*/
             table {
                 border-collapse: collapse;
             }
             th {
                 border: solid 1px;
-                padding: 0.5em;
+                padding: 0.1em;
                 text-align: center;
                 width: 100px;
             }
             td{
                 border: solid 1px;
-                padding: 0.5em;
+                padding: 0.1em;
                 text-align: center;
+            }
+
+            .checked {
+                color: orange;
             }
         </style> 
     </head>
     <body>
-        <!-- @section('sidebar') -->
-            <!-- ここがメインのサイドバー -->
-        <!-- @show -->
+        {{-- @section('sidebar')
+            ここがメインのサイドバー
+        @show --}}
 
         <div class="container">
             @yield('content')
