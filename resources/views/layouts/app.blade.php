@@ -23,30 +23,35 @@
         </script>
 
         <style>
-            /* div {
-                <!--border: 1px solid #000000;-->
-            } */
+            /*div {
+                border: 1px solid #000000;
+            }*/
+
+            /*table関連*/
             table {
                 border-collapse: collapse;
             }
             th {
                 border: solid 1px;
-                padding: 0.5em;
+                padding: 0.1em;
                 text-align: center;
                 width: 100px;
             }
             td{
                 border: solid 1px;
-                padding: 0.5em;
+                padding: 0.1em;
                 text-align: center;
             }
+
+            .checked {
+                color: orange;
+            }
         </style> 
-    
     </head>
     <body>
-        @section('sidebar')
+        {{-- @section('sidebar')
             ここがメインのサイドバー
-        @show
+        @show --}}
 
         <div class="container">
             @yield('content')
