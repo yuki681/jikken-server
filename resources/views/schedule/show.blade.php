@@ -5,7 +5,7 @@
     <!--ヘッダ的なやつ-->
     <div class="row">
         <div class="col-8 align-self-center">
-            <h4>明石高専学生食堂システム</h4>
+            <h4 style="margin: 5px 0px 0px 0px">明石高専学生食堂システム</h4>
         </div>
         <div class="col-4">
             <nav aria-label="Page navigation example">
@@ -25,9 +25,9 @@
             </nav> 
         </div>
     </div>
-    <hr>
+    <hr color="black" style="margin:6px 0px 6px 0px">
         <a href="{{ url ('/schedules/') }}">メニュー一覧に戻る</a>
-    <hr>
+    <hr color="black" style="margin:6px 0px 6px 0px">
 
     <!--メニュー名や価格-->
     <div class="row">
@@ -50,7 +50,7 @@
 
         <div class="row">
             <div class="col-12 align-self-center">
-            <p class="h4"><font color="#000099"><b>{{ $schedule->name }}</b></font></p>
+            <h4><font color="#000099"><b>{{ $schedule->name }}</b></font></h4>
             </div>
         </div>
 
@@ -70,10 +70,10 @@
         </div>
         <div class="col-3 text-center align-self-center">販売価格（税込）</div>
             <div class="col-2 text-center align-self-center">
-                <h4><b>￥{{ $schedule->price }}</b></h4>
+                <h4 style="margin-top:10px"><b>￥{{ $schedule->price }}</b></h4>
             </div>
         </div>
-    <hr>
+    <hr color="black" style="margin:6px 0px 6px 0px">
 
     <!--栄養価表示-->
     <div class="row">
@@ -99,13 +99,13 @@
         </div>
         </div>
     </div>
-    <hr>
+    <hr color="black" style="margin:6px 0px 6px 0px">
 
     <!--販売状況-->
     <div class="row">
         <div class="col-4 align-self-center">販売状況</div>
             <div class="col-4 text-center align-self-center">
-                <p class="h4">
+                <h4 style="margin-top:10px">
                     @if($schedule->date->isToday())
                         @if($schedule->is_on_sale)
                             <font color="green"><b>販売中</b></font>
@@ -117,37 +117,38 @@
                     @else
                         <font color="gray"><b>販売終了</b></font>
                     @endif
-                </p>
+                </h4>
             </div>
         <div class="col-4 text-center align-self-center">
             @if($schedule->date->isToday())
                 @if($schedule->is_on_sale)
-                    <form action="{{ url("/schedule/{$schedule->id}/soldout") }}" method="post">
+                    <form style="margin-block-end: 0em" action="{{ url("/schedule/{$schedule->id}/soldout") }}" method="post" >
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <button type="submit" class="btn btn-outline-danger">売り切れにする</button>
                     </form>
                 @else
-                    <form action="{{ url("/schedule/{$schedule->id}/cancel_soldout") }}" method="post">
+                    <form style="margin-block-end: 0em" action="{{ url("/schedule/{$schedule->id}/cancel_soldout") }}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
-                        <button type="submit" class="btn btn-outline-danger">販売中に戻す</button>
+                        <button type="submit" class="btn btn-outline-success">販売中に戻す</button>
                     </form>
                 @endif
             @endif
         </div>
     </div>
-    <hr>
+    <hr color="black" style="margin:6px 0px 6px 0px">
 
     <!--レビュー-->
     <div class="row">
         <div class="col-12">
         <div class="row">
             <div class="col-6 align-self-center">レビュー</div>
-            <div class="col-6 text-center align-self-center">平均満足度：★★★★★</div>
+            <div class="col-3 text-right align-self-center">平均満足度</div>
+            <div class="col-3">★★★★★</div>
         </div>
-        <hr style="border:none;border-top:dashed 1px #d3d3d3;height:1px;color:#FFFFFF;">
-        
+        <hr style="border:none;border-top:dashed 1px #d3d3d3;height:1px;color:#FFFFFF;margin:6px 0px 6px 0px">       
+ 
         <div class="row">
             <div class="col-8 align-self-center">明石　太郎さんの満足度：★★★★★</div>
             <div class="col-4 text-right align-self-center"><font color="gray">2019年2月3日</font></div>
@@ -158,7 +159,7 @@
             </div>
         </div>
 
-        <hr style="border:none;border-top:dashed 1px #d3d3d3;height:1px;color:#FFFFFF;">
+        <hr style="border:none;border-top:dashed 1px #d3d3d3;height:1px;color:#FFFFFF;margin:6px 0px 6px 0px">
         <div class="row">
             <div class="col-8">
             <form>
@@ -168,9 +169,24 @@
                 </div>
             </form>
             </div>
-            <div class="col-4 align-self-center">
-            <p>満足度（選択できるようにする）</p>
-            <p style="text-align: center">☆☆☆☆☆</p>
+            <div class="col-4">
+                <div class="row"><div class="col-12">満足度</div></div>
+                <div class="row">
+                    <div class="col-12">
+                        <fieldset class="rating">
+                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                            <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                            <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                            <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                            <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                            <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                        </fieldset>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -178,7 +194,7 @@
             <form>
                 <div class="form-group">
                 <label for="exampleFormControlTextarea1">レビューを書く</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4">レビューを入力…</textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="レビューを入力…"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary" style="float:right">レビューを投稿する</button>
             </form>
