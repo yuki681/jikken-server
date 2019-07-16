@@ -70,7 +70,7 @@
         </div>
         <div class="col-3 text-center align-self-center">販売価格（税込）</div>
             <div class="col-2 text-center align-self-center">
-                <h4 style="margin-top:10px"><b>￥{{ $schedule->price }}</b></h4>
+                <h4 style="margin-top: 10px"><b>￥{{ $schedule->price }}</b></h4>
             </div>
         </div>
     <hr color="black" style="margin:6px 0px 6px 0px">
