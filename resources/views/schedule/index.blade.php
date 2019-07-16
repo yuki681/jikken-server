@@ -126,18 +126,16 @@
 			</div>
 			<hr color="black" style="margin:6px 0px 6px 0px">
 		@endforeach
-		@else
-			<div class="row">
-				<div class="col-6">
-					<div class="row">
-						<div class="col-12 align-self-center">
-							<p>メニューがありません</p>
-						</div>
+	@else
+		<div class="row">
+			<div class="col-6">
+				<div class="row">
+					<div class="col-12 align-self-center">
+						<p>メニューがありません</p>
 					</div>
 				</div>
 			</div>
-		@endif
-		<hr color="black" style="margin:6px 0px 6px 0px">
 		</div>
-	</body>
-</html>
+	@endif
+	<hr color="black" style="margin:6px 0px 6px 0px">
+@endsection
