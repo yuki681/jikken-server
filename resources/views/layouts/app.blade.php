@@ -48,6 +48,7 @@
             }
         </style> 
     </head>
+
     <body>
         {{-- @section('sidebar')
             ここがメインのサイドバー
