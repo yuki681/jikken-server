@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Schedule;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class SchedulesController extends Controller
 {
@@ -45,31 +46,19 @@ class SchedulesController extends Controller
             return redirect("/schedule/{$id}")->with('status', 'failed');
         }
     }
-  public function index()
-  {
-    $date = date("Y-n-j");
-    if(isset($_GET["date"])){
-      $date = $_GET["date"];
-    }
-    $menus = \App\Schedule::where('date', '=', $date)->leftjoin('menus', 'schedules.menu_id', '=', 'menus.id')->get();
-    $date_before = date("Y-m-d", strtotime($date.'-1day'));
-    $date_after = date("Y-m-d", strtotime($date.'+1day'));
-    $a_menu = new \App\Schedule();
-    $b_menu = new \App\Schedule();
-    foreach ($menus as $menu) {
-      switch($menu->type){
-        case "A":
-          $a_menu = $menu;
-          break;
-        case "B":
-          $b_menu = $menu;
-          break;
-        default:
 
-      }
-    }
+    public function index()
+    {
+        try {
+          $date = Carbon::parse($_GET['date']);
+        } catch (\Throwable $th) {
+          $date = Carbon::now();
+        }
 
-    $menus = $menus->where("id", "!=", $a_menu->id)->where("id", "!=", $b_menu->id);
-    return view('schedule.index', compact('menus', 'a_menu', 'b_menu', 'date', 'date_before', 'date_after'));
-  }
+        $menus = \App\Schedule::where('date', '=', $date->toDateString())->orderBy('type', 'asc')->get();
+        $date_before = \App\Schedule::where('date', '<', $date->toDateString())->max('date');
+        $date_after = \App\Schedule::where('date', '>', $date->toDateString())->min('date');
+        
+        return view('schedule.index', compact('menus', 'date', 'date_before', 'date_after'));
+    }
 }
