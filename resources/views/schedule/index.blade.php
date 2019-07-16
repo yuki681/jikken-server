@@ -124,15 +124,15 @@
 				<hr color="black" style="margin:6px 0px 6px 0px">
 			@endif
 		@endforeach
-	@else
-		<div class="row">
-			<div class="col-6">
-				<div class="row">
-					<div class="col-12 align-self-center">
-						<p>メニューがありません</p>
+		@else
+			<div class="row">
+				<div class="col-6">
+					<div class="row">
+						<div class="col-12 align-self-center">
+							<p>メニューがありません</p>
+						</div>
 					</div>
 				</div>
-			</div>
 			</div>
 		@endif
 		<hr color="black" style="margin:6px 0px 6px 0px">
