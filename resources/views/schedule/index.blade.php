@@ -5,36 +5,36 @@
 	<!--ヘッダ的なやつ-->
 	<div class="row">
 		<div class="col-8 align-self-center">
-		<p class="h4" style="margin: 5px 0px 0px 0px">明石高専学生食堂システム</p>
+			<p class="h4" style="margin: 5px 0px 0px 0px">明石高専学生食堂システム</p>
 		</div>
 		<div class="col-4">
-		<nav aria-label="Page navigation example" style="margin: 0px 0px -16px 0px">
-			<ul class="pagination justify-content-center">
-			<li class="page-item">
-				@if(!is_null($date_before))
-					<a class="page-link" href="/schedule?date={{$date_before}}" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-					</a>
-				@else
-					<a class="page-link" href="#" aria-label="Previous" aria-disabled="true">
-						<span aria-hidden="true">&laquo;</span>
-					</a>
-				@endif
-			</li>
-			<li class="page-item"><a class="page-link" href="#">{{ $date->format('Y年n月j日') }}</a></li>
-			<li class="page-item">
-				@if(!is_null($date_after))
-					<a class="page-link" href="/schedule?date={{$date_after}}" aria-label="Next">
-						<span aria-hidden="true">&raquo;</span>
-					</a>
-				@else
-					<a class="page-link" href="#" aria-label="Next" aria-disabled="true">
-						<span aria-hidden="true">&raquo;</span>
-					</a>
-				@endif
-			</li>
-			</ul>
-		</nav> 
+			<nav aria-label="Page navigation example" style="margin: 0px 0px -16px 0px">
+				<ul class="pagination justify-content-center">
+				<li class="page-item">
+					@if(!is_null($date_before))
+						<a class="page-link" href="/schedule?date={{$date_before}}" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					@else
+						<a class="page-link" href="#" aria-label="Previous" aria-disabled="true">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					@endif
+				</li>
+				<li class="page-item"><a class="page-link" href="#">{{ $date->format('Y年n月j日') }}</a></li>
+				<li class="page-item">
+					@if(!is_null($date_after))
+						<a class="page-link" href="/schedule?date={{$date_after}}" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					@else
+						<a class="page-link" href="#" aria-label="Next" aria-disabled="true">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					@endif
+				</li>
+				</ul>
+			</nav> 
 		</div>
 	</div>
 	<hr color="black" style="margin:6px 0px 6px 0px">
@@ -46,14 +46,14 @@
 					<div class="row">
 						<div class="col-12 align-self-center">
 							@switch($menu->type)
-							@case('A')
-								日替わりメニュー　Aセット
-								@break
-							@case('B')
-								日替わりメニュー　Bセット
-								@break
-							@default
-								常設メニュー
+								@case('A')
+									日替わりメニュー　Aセット
+									@break
+								@case('B')
+									日替わりメニュー　Bセット
+									@break
+								@default
+									常設メニュー
 							@endswitch
 						</div>
 					</div>
@@ -77,18 +77,22 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-12 align-self-center">レビュー：
-							<?php if($menu->getMeansReputation() != NULL): ?>
-								<?php for($i = 0; $i < 5;$i++):?>
-								<?php if(floor($menu->getMeansReputation()) < $i):?>
-									★
+						<div class="col-12 align-self-center">
+							
+							<div class="rating">
+								<?php if($menu->getMeansReputation() != NULL): ?>
+									<?php for($i = 5; $i > 0; $i--):?>
+										<?php if(round($menu->getMeansReputation()) >= $i):?>
+											<label style="color:#FFD700"></label>
+										<?php else:?>
+											<label style="color:#ddd"></label>
+										<?php endif;?>
+									<?php endfor; ?>
 								<?php else:?>
-									☆
+									まだ評価されていません
 								<?php endif;?>
-								<?php endfor; ?>
-							<?php else:?>
-								まだ評価されてません
-							<?php endif;?>
+								
+							</div>
 						</div>
 					</div>
 				</div>
