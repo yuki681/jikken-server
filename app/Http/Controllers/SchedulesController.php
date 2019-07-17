@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Schedule;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class SchedulesController extends Controller
 {
@@ -44,5 +45,20 @@ class SchedulesController extends Controller
         else{
             return redirect("/schedule/{$id}")->with('status', 'failed');
         }
+    }
+
+    public function index()
+    {
+        try {
+          $date = Carbon::parse($_GET['date']);
+        } catch (\Throwable $th) {
+          $date = Carbon::now();
+        }
+
+        $menus = \App\Schedule::where('date', '=', $date->toDateString())->orderBy('type', 'asc')->get();
+        $date_before = \App\Schedule::where('date', '<', $date->toDateString())->max('date');
+        $date_after = \App\Schedule::where('date', '>', $date->toDateString())->min('date');
+        
+        return view('schedule.index', compact('menus', 'date', 'date_before', 'date_after'));
     }
 }
