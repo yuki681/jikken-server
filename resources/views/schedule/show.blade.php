@@ -26,7 +26,7 @@
         </div>
     </div>
     <hr color="black" style="margin:6px 0px 6px 0px">
-        <a href="{{ url ('/schedule/') }}">メニュー一覧に戻る</a>
+        <a href="{{ url ('/schedule/?date=' . $schedule->date->toDateString()) }}">メニュー一覧に戻る</a>
     <hr color="black" style="margin:6px 0px 6px 0px">
 
     <!--メニュー名や価格-->
