@@ -2,6 +2,37 @@
 @section('title', '詳細画面')
 
 @section('content')
+
+    @if(session('success'))
+        <div class="row">
+            <div class="col-12 align-self-center">
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if(session('failed'))
+        <div class="row">
+            <div class="col-12 align-self-center">
+                <div class="alert alert-danger" role="alert">
+                    {{ session('failed') }}
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if($errors->any())
+        <div class="row">
+            <div class="col-12 align-self-center">
+                <div class="alert alert-danger" role="alert">
+                    レビューの投稿に失敗しました。
+                </div>
+            </div>
+        </div>
+    @endif
+    
     <!--ヘッダ的なやつ-->
     <div class="row">
         <div class="col-8 align-self-center">

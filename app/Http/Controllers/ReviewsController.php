@@ -16,10 +16,10 @@ class ReviewsController extends Controller
         $review->author_name = $request->author_name;
 
         if($review->save()){
-            return redirect("/schedule/{$schedule_id}")->with('status', 'success-review');
+            return redirect("/schedule/{$schedule_id}")->with('success', 'レビューを投稿しました。');
         }
         else{
-            return redirect("/schedule/{$schedule_id}")->with('status', 'failed-review');
+            return redirect("/schedule/{$schedule_id}")->with('failed', 'レビューの投稿に失敗しました。');
         }
     }
 }
