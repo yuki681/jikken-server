@@ -8,7 +8,7 @@ use App\Http\Requests\ReviewRequest;
 
 class ReviewsController extends Controller
 {
-    public function create(ReviewRequest $request){
+    public function create($schedule_id, ReviewRequest $request){
         $review = new Review;
         $review->menu_id = $request->menu_id;
         $review->message = $request->message;
@@ -16,10 +16,10 @@ class ReviewsController extends Controller
         $review->author_name = $request->author_name;
 
         if($review->save()){
-            return redirect("/schedule/{$review->menu_id}")->with('status', 'success-review');
+            return redirect("/schedule/{$schedule_id}")->with('status', 'success-review');
         }
         else{
-            return redirect("/schedule/{$review->menu_id}")->with('status', 'failed-review');
+            return redirect("/schedule/{$schedule_id}")->with('status', 'failed-review');
         }
     }
 }

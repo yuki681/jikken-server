@@ -169,14 +169,13 @@
             <hr style="border:none;border-top:dashed 1px #d3d3d3;height:1px;color:#FFFFFF;margin:6px 0px 6px 0px">
         @endforeach
 
-        <form action="{{ url("/review/create") }}" method="post">
+        <form action="{{ url('/schedule/' . $schedule->id . '/review/create') }}" method="post">
             {{ csrf_field() }}
             <input name="menu_id" type="hidden" value="{{ $schedule->menu_id }}">
             <div class="row">
                 <div class="col-8">
                     <div class="form-group">
                         <label for="exampleInputEmail1">名前を書く</label>
-                        {{-- これおかしい --}}
                         <input type = "text" name="author_name" class="form-control" placeholder="名前を入力…">
                     </div>
                 </div>
