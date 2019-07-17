@@ -97,14 +97,14 @@
 					</div>
 				</div>
 				<div class="col-6">
-					<div class="row h-50">
+					<div class="row">
 						<div class="col-6 align-self-center" style="text-align:center">販売価格（税込）</div>
 						<div class="col-6 align-self-center" style="text-align:center">
 							<p class="h4" style="margin-top: 10px"><b>￥{{$menu->menu->price}}</b></p>
 						</div>
 					</div>
 					<hr style="margin: 0px 0px 0px 0px">
-					<div class="row h-50">
+					<div class="row">
 						<div class="col-6 align-self-center" style="text-align:center">販売状況</div>
 						<div class="col-6 align-self-center" style="text-align:center">
 							<p class="h4" style="margin-top: 10px">
@@ -137,5 +137,4 @@
 			</div>
 		</div>
 	@endif
-	<hr color="black" style="margin:6px 0px 6px 0px">
 @endsection

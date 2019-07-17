@@ -9,7 +9,7 @@ use Carbon\Carbon;
 class SchedulesController extends Controller
 {
     public function show($id){
-        $schedule = Schedule::join('menus', 'schedules.menu_id', '=', 'menus.id')->findOrFail($id);
+        $schedule = Schedule::findOrFail($id);
         return view('schedule.show', ['schedule' => $schedule]);
     }
 

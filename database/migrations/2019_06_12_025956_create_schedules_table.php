@@ -19,7 +19,7 @@ class CreateSchedulesTable extends Migration
             $table->integer('menu_id');
             $table->date('date');
             $table->dateTime('sold_time');
-            $table->char('type',10);
+            $table->char('type',1);
 
             $table->foreign('menu_id')->references('id')->on('menus');
         });

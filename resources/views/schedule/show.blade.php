@@ -50,7 +50,7 @@
 
         <div class="row">
             <div class="col-12 align-self-center">
-                <p class="h4" style="margin-top: 10px"><font color="#000099"><b>{{ $schedule->name }}</b></font></p>
+                <p class="h4" style="margin-top: 10px"><font color="#000099"><b>{{ $schedule->menu->name }}</b></font></p>
             </div>
         </div>
 
@@ -70,7 +70,7 @@
         </div>
         <div class="col-3 text-center align-self-center">販売価格（税込）</div>
             <div class="col-2 text-center align-self-center">
-                <h4 style="margin-top: 10px"><b>￥{{ $schedule->price }}</b></h4>
+                <h4 style="margin-top: 10px"><b>￥{{ $schedule->menu->price }}</b></h4>
             </div>
         </div>
     <hr color="black" style="margin:6px 0px 6px 0px">
@@ -90,10 +90,10 @@
                 <th>塩分</th>
             </tr>
             <tr>
-                <td>{{ $schedule->energy }}kcal</td>
-                <td>{{ $schedule->protein }}g</td>
-                <td>{{ $schedule->lipid }}g</td>
-                <td>{{ $schedule->salt }}g</td>
+                <td>{{ $schedule->menu->energy }}kcal</td>
+                <td>{{ $schedule->menu->protein }}g</td>
+                <td>{{ $schedule->menu->lipid }}g</td>
+                <td>{{ $schedule->menu->salt }}g</td>
             </tr>
             </table>
         </div>
