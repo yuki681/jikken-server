@@ -78,33 +78,23 @@
 					</div>
 					<div class="row">
 						<div class="col-12 align-self-center">
-							
-							<div class="rating">
-								<?php if($menu->getMeansReputation() != NULL): ?>
-									<?php for($i = 5; $i > 0; $i--):?>
-										<?php if(round($menu->getMeansReputation()) >= $i):?>
-											<label style="color:#FFD700"></label>
-										<?php else:?>
-											<label style="color:#ddd"></label>
-										<?php endif;?>
-									<?php endfor; ?>
-								<?php else:?>
-									まだ評価されていません
-								<?php endif;?>
-								
-							</div>
+							<?php if($menu->getMeansReputation() != NULL): ?>
+								@include('partials.star', ['rate' => round($menu->getMeansReputation())])
+							<?php else:?>
+								まだ評価されていません
+							<?php endif;?>
 						</div>
 					</div>
 				</div>
 				<div class="col-6">
-					<div class="row h-50">
+					<div class="row">
 						<div class="col-6 align-self-center" style="text-align:center">販売価格（税込）</div>
 						<div class="col-6 align-self-center" style="text-align:center">
 							<p class="h4" style="margin-top: 10px"><b>￥{{$menu->menu->price}}</b></p>
 						</div>
 					</div>
 					<hr style="margin: 0px 0px 0px 0px">
-					<div class="row h-50">
+					<div class="row">
 						<div class="col-6 align-self-center" style="text-align:center">販売状況</div>
 						<div class="col-6 align-self-center" style="text-align:center">
 							<p class="h4" style="margin-top: 10px">
@@ -137,5 +127,4 @@
 			</div>
 		</div>
 	@endif
-	<hr color="black" style="margin:6px 0px 6px 0px">
 @endsection

@@ -2,6 +2,37 @@
 @section('title', '詳細画面')
 
 @section('content')
+
+    @if(session('success'))
+        <div class="row">
+            <div class="col-12 align-self-center">
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if(session('failed'))
+        <div class="row">
+            <div class="col-12 align-self-center">
+                <div class="alert alert-danger" role="alert">
+                    {{ session('failed') }}
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if($errors->any())
+        <div class="row">
+            <div class="col-12 align-self-center">
+                <div class="alert alert-danger" role="alert">
+                    レビューの投稿に失敗しました。
+                </div>
+            </div>
+        </div>
+    @endif
+    
     <!--ヘッダ的なやつ-->
     <div class="row">
         <div class="col-8 align-self-center">
@@ -26,7 +57,7 @@
         </div>
     </div>
     <hr color="black" style="margin:6px 0px 6px 0px">
-        <a href="{{ url ('/schedule/') }}">メニュー一覧に戻る</a>
+        <a href="{{ url ('/schedule/?date=' . $schedule->date->toDateString()) }}">メニュー一覧に戻る</a>
     <hr color="black" style="margin:6px 0px 6px 0px">
 
     <!--メニュー名や価格-->
@@ -50,7 +81,7 @@
 
         <div class="row">
             <div class="col-12 align-self-center">
-                <p class="h4" style="margin-top: 10px"><font color="#000099"><b>{{ $schedule->name }}</b></font></p>
+                <p class="h4" style="margin-top: 10px"><font color="#000099"><b>{{ $schedule->menu->name }}</b></font></p>
             </div>
         </div>
 
@@ -70,7 +101,7 @@
         </div>
         <div class="col-3 text-center align-self-center">販売価格（税込）</div>
             <div class="col-2 text-center align-self-center">
-                <h4 style="margin-top: 10px"><b>￥{{ $schedule->price }}</b></h4>
+                <h4 style="margin-top: 10px"><b>￥{{ $schedule->menu->price }}</b></h4>
             </div>
         </div>
     <hr color="black" style="margin:6px 0px 6px 0px">
@@ -90,10 +121,10 @@
                 <th>塩分</th>
             </tr>
             <tr>
-                <td>{{ $schedule->energy }}kcal</td>
-                <td>{{ $schedule->protein }}g</td>
-                <td>{{ $schedule->lipid }}g</td>
-                <td>{{ $schedule->salt }}g</td>
+                <td>{{ $schedule->menu->energy }}kcal</td>
+                <td>{{ $schedule->menu->protein }}g</td>
+                <td>{{ $schedule->menu->lipid }}g</td>
+                <td>{{ $schedule->menu->salt }}g</td>
             </tr>
             </table>
         </div>
@@ -143,63 +174,83 @@
     <div class="row">
         <div class="col-12">
         <div class="row">
-            <div class="col-6 align-self-center">レビュー</div>
-            <div class="col-3 text-right align-self-center">平均満足度</div>
-            <div class="col-3">★★★★★</div>
-        </div>
-        <hr style="border:none;border-top:dashed 1px #d3d3d3;height:1px;color:#FFFFFF;margin:6px 0px 6px 0px">       
- 
-        <div class="row">
-            <div class="col-8 align-self-center">明石　太郎さんの満足度：★★★★★</div>
-            <div class="col-4 text-right align-self-center"><font color="gray">2019年2月3日</font></div>
-        </div>
-        <div class="row">
-            <div class="col-12 align-self-center">
-            美味しかったです。この価格でこのボリュームはお得だと思います。
-            </div>
-        </div>
+            <div class="col-4 align-self-center">レビュー</div>
 
-        <hr style="border:none;border-top:dashed 1px #d3d3d3;height:1px;color:#FFFFFF;margin:6px 0px 6px 0px">
-        <div class="row">
-            <div class="col-8">
-            <form>
-                <div class="form-group">
-                <label for="exampleInputEmail1">名前を書く</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="名前を入力…">
-                </div>
-            </form>
-            </div>
+            <div class="col-4 text-right align-self-center">平均満足度</div>
             <div class="col-4">
-                <div class="row"><div class="col-12">満足度</div></div>
+                @if(!is_null($schedule->getMeansReputation()))
+                    @include('partials.star', ['rate' => round($schedule->getMeansReputation())])
+                @else
+                    まだ評価されていません
+                @endif
+            </div>
+        </div>
+        <hr style="border:none;border-top:dashed 1px #d3d3d3;height:1px;color:#FFFFFF;margin:6px 0px 6px 0px">
+        
+        @foreach ($schedule->menu->reviews as $review)
+            <div class="row">
+                <div class="col-4 align-self-center">{{ $review->author_name }}さん</div>
+                <div class="col-4">
+                    @include('partials.star', ['rate' => $review->reputation])
+                </div>
+                <div class="col-4 text-right align-self-center"><font color="gray">{{ $review->updated_at->format('Y年n月j日') }}</font></div>
+            </div>
+            <div class="row">
+                <div class="col-12 align-self-center">
+                    {{ $review->message }}
+                </div>
+            </div>
+
+            <hr style="border:none;border-top:dashed 1px #d3d3d3;height:1px;color:#FFFFFF;margin:6px 0px 6px 0px">
+        @endforeach
+
+        <form action="{{ url('/schedule/' . $schedule->id . '/review/create') }}" method="post">
+            {{ csrf_field() }}
+            <input name="menu_id" type="hidden" value="{{ $schedule->menu_id }}">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="form-group">
+                            <label for="inputAuthorName">名前を書く</label>
+                            <input type="text" id="inputAuthorName" name="author_name" placeholder="名前を入力…" value="{{ old('author_name') }}"
+                                class="form-control{{$errors->has('author_name')?" is-invalid":""}}" >
+                            @if($errors->has('author_name'))
+                                <div class="invalid-feedback">{{ $errors->first('author_name') }}</div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="row"><div class="col-12">満足度（選択）</div></div>
+                        <div class="row">
+                            <div class="col-12">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="reputation" value="5" {{ old('reputation') == 5 ? 'checked' : '' }}/><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                    <input type="radio" id="star4" name="reputation" value="4" {{ old('reputation') == 4 ? 'checked' : '' }}/><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                    <input type="radio" id="star3" name="reputation" value="3" {{ old('reputation') == 3 ? 'checked' : '' }}/><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                    <input type="radio" id="star2" name="reputation" value="2" {{ old('reputation') == 2 ? 'checked' : '' }}/><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                    <input type="radio" id="star1" name="reputation" value="1" {{ old('reputation') == 1 ? 'checked' : '' }}/><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                </fieldset>
+                            </div>
+                            @if($errors->has('reputation'))
+                                <div class="col-12">
+                                    <span style="font-size:80%"><font color="#dc3545">{{ $errors->first('reputation') }}</font></span>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-12">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                        </fieldset>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">レビューを書く</label>
+                            <textarea name="message" class="form-control{{$errors->has('message')?" is-invalid":""}}" rows="4" placeholder="レビューを入力…">{{ old('message') }}</textarea>
+                            @if($errors->has('message'))
+                                <div class="invalid-feedback">{{ $errors->first('message') }}</div>
+                            @endif
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="float:right">レビューを投稿する</button> 
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-            <form>
-                <div class="form-group">
-                <label for="exampleFormControlTextarea1">レビューを書く</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="レビューを入力…"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary" style="float:right">レビューを投稿する</button>
-            </form>
-            </div>
-        </div>
-        </div>
+        </form>
     </div>
 @endsection

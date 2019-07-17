@@ -9,7 +9,7 @@ use Carbon\Carbon;
 class SchedulesController extends Controller
 {
     public function show($id){
-        $schedule = Schedule::join('menus', 'schedules.menu_id', '=', 'menus.id')->findOrFail($id);
+        $schedule = Schedule::findOrFail($id);
         return view('schedule.show', ['schedule' => $schedule]);
     }
 
@@ -19,14 +19,14 @@ class SchedulesController extends Controller
         if($schedule->is_on_sale){
             $schedule->sold_time = now();
             if($schedule->save()){
-                return redirect("/schedule/{$id}")->with('status', 'success');
+                return redirect("/schedule/{$id}")->with('success', '売り切れ情報を更新しました。');
             }
             else{
-                return redirect("/schedule/{$id}")->with('status', 'failed');
+                return redirect("/schedule/{$id}")->with('failed', '売り切れ情報の更新に失敗しました。');
             }
         }
         else{
-            return redirect("/schedule/{$id}")->with('status', 'failed');
+            return redirect("/schedule/{$id}")->with('failed', 'すでに販売中の状態です。');
         }
     }
 
@@ -36,14 +36,14 @@ class SchedulesController extends Controller
         if($schedule->is_sold_out){
             $schedule->sold_time = null;
             if($schedule->save()){
-                return redirect("/schedule/{$id}")->with('status', 'success');
+                return redirect("/schedule/{$id}")->with('success', '売り切れ情報を更新しました。');
             }
             else{
-                return redirect("/schedule/{$id}")->with('status', 'failed');
+                return redirect("/schedule/{$id}")->with('failed', '売り切れ情報の更新に失敗しました。');
             }
         }
         else{
-            return redirect("/schedule/{$id}")->with('status', 'failed');
+            return redirect("/schedule/{$id}")->with('failed', 'すでに売り切れの状態です。');
         }
     }
 
