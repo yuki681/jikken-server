@@ -31,7 +31,17 @@ class ReviewRequest extends FormRequest
         ];
     }
 
-    // public function messages(){
+    public function messages()
+    {
+        return [
+            'message.required' => 'レビューを入力してください。',
+            'reputation.required' => '評価を選択してください。',
+            'author_name.required' => '名前を入力してください。'
+        ];
+    }
 
+    // public function reviewAttributes()
+    // {
+        
     // }
 }
