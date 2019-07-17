@@ -243,7 +243,7 @@
                     <form>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">レビューを書く</label>
-                            <textarea name="message" class="form-control{{$errors->has('message')?" is-invalid":""}}" rows="4" placeholder="レビューを入力…">{{ old('reputation') }}</textarea>
+                            <textarea name="message" class="form-control{{$errors->has('message')?" is-invalid":""}}" rows="4" placeholder="レビューを入力…">{{ old('message') }}</textarea>
                             @if($errors->has('message'))
                                 <div class="invalid-feedback">{{ $errors->first('message') }}</div>
                             @endif
