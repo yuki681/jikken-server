@@ -12,7 +12,7 @@
 				<ul class="pagination justify-content-center">
 				<li class="page-item">
 					@if(!is_null($date_before))
-						<a class="page-link" href="/schedule?date={{$date_before}}" aria-label="Previous">
+						<a class="page-link" href="schedule?date={{$date_before}}" aria-label="Previous">
 							<span aria-hidden="true">&laquo;</span>
 						</a>
 					@else
@@ -24,7 +24,7 @@
 				<li class="page-item"><a class="page-link" href="#">{{ $date->format('Y年n月j日') }}</a></li>
 				<li class="page-item">
 					@if(!is_null($date_after))
-						<a class="page-link" href="/schedule?date={{$date_after}}" aria-label="Next">
+						<a class="page-link" href="schedule?date={{$date_after}}" aria-label="Next">
 							<span aria-hidden="true">&raquo;</span>
 						</a>
 					@else
