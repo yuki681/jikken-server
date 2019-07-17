@@ -169,42 +169,43 @@
             <hr style="border:none;border-top:dashed 1px #d3d3d3;height:1px;color:#FFFFFF;margin:6px 0px 6px 0px">
         @endforeach
 
-        <div class="row">
-            <div class="col-8">
-            <form>
-            {{-- <form action="{{ url("/review/create") }}" method="post"> --}}
-                <div class="form-group">
-                <label for="exampleInputEmail1">名前を書く</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="名前を入力…">
+        <form action="{{ url("/review/create") }}" method="post">
+            {{ csrf_field() }}
+            <input name="menu_id" type="hidden" value="{{ $schedule->menu_id }}">
+            <div class="row">
+                <div class="col-8">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">名前を書く</label>
+                        {{-- これおかしい --}}
+                        <input type = "text" name="author_name" class="form-control" placeholder="名前を入力…">
+                    </div>
                 </div>
-            </form>
-            </div>
-            <div class="col-4">
-                <div class="row"><div class="col-12">満足度</div></div>
-                <div class="row">
-                    <div class="col-12">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                        </fieldset>
+                <div class="col-4">
+                    <div class="row"><div class="col-12">満足度（選択）</div></div>
+                    <div class="row">
+                        <div class="col-12">
+                            <fieldset class="rating">
+                                <input type="radio" id="star5" name="reputation" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                <input type="radio" id="star4" name="reputation" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                <input type="radio" id="star3" name="reputation" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                <input type="radio" id="star2" name="reputation" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                <input type="radio" id="star1" name="reputation" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                            </fieldset>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-            <form>
-                <div class="form-group">
-                <label for="exampleFormControlTextarea1">レビューを書く</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="レビューを入力…"></textarea>
+            <div class="row">
+                <div class="col-12">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">レビューを書く</label>
+                            <textarea name="message" class="form-control" rows="4" placeholder="レビューを入力…"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="float:right">レビューを投稿する</button> 
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary" style="float:right">レビューを投稿する</button>
-            </form>
             </div>
-        </div>
-        </div>
+        </form>
     </div>
 @endsection
