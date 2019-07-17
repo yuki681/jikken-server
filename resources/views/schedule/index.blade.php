@@ -78,22 +78,11 @@
 					</div>
 					<div class="row">
 						<div class="col-12 align-self-center">
-							
-							<div class="rating">
-								{{-- ここリファクタリング --}}
-								<?php if($menu->getMeansReputation() != NULL): ?>
-									<?php for($i = 5; $i > 0; $i--):?>
-										<?php if(round($menu->getMeansReputation()) >= $i):?>
-											<label style="color:#FFD700"></label>
-										<?php else:?>
-											<label style="color:#ddd"></label>
-										<?php endif;?>
-									<?php endfor; ?>
-								<?php else:?>
-									まだ評価されていません
-								<?php endif;?>
-								
-							</div>
+							<?php if($menu->getMeansReputation() != NULL): ?>
+								@include('partials.star', ['rate' => round($menu->getMeansReputation())])
+							<?php else:?>
+								まだ評価されていません
+							<?php endif;?>
 						</div>
 					</div>
 				</div>

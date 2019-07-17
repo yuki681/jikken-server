@@ -147,7 +147,11 @@
 
             <div class="col-4 text-right align-self-center">平均満足度</div>
             <div class="col-4">
-                @include('partials.star', ['rate' => round($schedule->getMeansReputation())])
+                @if(!is_null($schedule->getMeansReputation()))
+                    @include('partials.star', ['rate' => round($schedule->getMeansReputation())])
+                @else
+                    まだ評価されていません
+                @endif
             </div>
         </div>
         <hr style="border:none;border-top:dashed 1px #d3d3d3;height:1px;color:#FFFFFF;margin:6px 0px 6px 0px">
