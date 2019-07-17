@@ -208,39 +208,38 @@
             {{ csrf_field() }}
             <input name="menu_id" type="hidden" value="{{ $schedule->menu_id }}">
                 <div class="row">
-                <div class="col-8">
-                    <div class="form-group">
-                        <label for="inputAuthorName">名前を書く</label>
-                        <input type="text" id="inputAuthorName" name="author_name" placeholder="名前を入力…" value="{{ old('author_name') }}"
-                            class="form-control{{$errors->has('author_name')?" is-invalid":""}}" >
-                        @if($errors->has('author_name'))
-                            <div class="invalid-feedback">{{ $errors->first('author_name') }}</div>
-                        @endif
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="row"><div class="col-12">満足度（選択）</div></div>
-                    <div class="row">
-                        <div class="col-12">
-                            <fieldset class="rating">
-                                <input type="radio" id="star5" name="reputation" value="5" {{ old('reputation') == 5 ? 'checked' : '' }}/><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                <input type="radio" id="star4" name="reputation" value="4" {{ old('reputation') == 4 ? 'checked' : '' }}/><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                <input type="radio" id="star3" name="reputation" value="3" {{ old('reputation') == 3 ? 'checked' : '' }}/><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                <input type="radio" id="star2" name="reputation" value="2" {{ old('reputation') == 2 ? 'checked' : '' }}/><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                <input type="radio" id="star1" name="reputation" value="1" {{ old('reputation') == 1 ? 'checked' : '' }}/><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
+                    <div class="col-8">
+                        <div class="form-group">
+                            <label for="inputAuthorName">名前を書く</label>
+                            <input type="text" id="inputAuthorName" name="author_name" placeholder="名前を入力…" value="{{ old('author_name') }}"
+                                class="form-control{{$errors->has('author_name')?" is-invalid":""}}" >
+                            @if($errors->has('author_name'))
+                                <div class="invalid-feedback">{{ $errors->first('author_name') }}</div>
+                            @endif
                         </div>
-                        @if($errors->has('reputation'))
+                    </div>
+                    <div class="col-4">
+                        <div class="row"><div class="col-12">満足度（選択）</div></div>
+                        <div class="row">
                             <div class="col-12">
-                                <span style="font-size:80%"><font color="#dc3545">{{ $errors->first('reputation') }}</font></span>
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="reputation" value="5" {{ old('reputation') == 5 ? 'checked' : '' }}/><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                    <input type="radio" id="star4" name="reputation" value="4" {{ old('reputation') == 4 ? 'checked' : '' }}/><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                    <input type="radio" id="star3" name="reputation" value="3" {{ old('reputation') == 3 ? 'checked' : '' }}/><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                    <input type="radio" id="star2" name="reputation" value="2" {{ old('reputation') == 2 ? 'checked' : '' }}/><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                    <input type="radio" id="star1" name="reputation" value="1" {{ old('reputation') == 1 ? 'checked' : '' }}/><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                </fieldset>
                             </div>
-                        @endif
+                            @if($errors->has('reputation'))
+                                <div class="col-12">
+                                    <span style="font-size:80%"><font color="#dc3545">{{ $errors->first('reputation') }}</font></span>
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <form>
+                <div class="row">
+                    <div class="col-12">
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">レビューを書く</label>
                             <textarea name="message" class="form-control{{$errors->has('message')?" is-invalid":""}}" rows="4" placeholder="レビューを入力…">{{ old('message') }}</textarea>
