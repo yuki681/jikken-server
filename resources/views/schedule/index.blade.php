@@ -80,6 +80,7 @@
 						<div class="col-12 align-self-center">
 							
 							<div class="rating">
+								{{-- ここリファクタリング --}}
 								<?php if($menu->getMeansReputation() != NULL): ?>
 									<?php for($i = 5; $i > 0; $i--):?>
 										<?php if(round($menu->getMeansReputation()) >= $i):?>

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Schedule extends Model
 {
+    // ここMenuにあるべき
     public function getMeansReputation(){
         $review = \App\Review::where('menu_id', '=', $this->menu_id);
         $means = $review->pluck('reputation')->avg();
