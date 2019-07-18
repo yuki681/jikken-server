@@ -10,29 +10,17 @@
 		<div class="col-12 align-self-center">
 			<nav aria-label="Page navigation example" style="margin: 0px 0px -16px 0px">
 				<ul class="pagination justify-content-center">
-				<li class="page-item">
-					@if(!is_null($date_before))
-						<a class="page-link" href="schedule?date={{$date_before}}" aria-label="Previous">
+					<li class="page-item{{ !is_null($date_before) ? "" : " disabled" }}">
+						<a class="page-link" href="{{ !is_null($date_before) ? "schedule?date=".$date_before : "#" }}" aria-label="Previous">
 							<span aria-hidden="true">&laquo;</span>
 						</a>
-					@else
-						<a class="page-link" href="#" aria-label="Previous" aria-disabled="true">
-							<span aria-hidden="true">&laquo;</span>
-						</a>
-					@endif
-				</li>
-				<li class="page-item"><a class="page-link" href="#">{{ $date->format('Y年n月j日') }}</a></li>
-				<li class="page-item">
-					@if(!is_null($date_after))
-						<a class="page-link" href="schedule?date={{$date_after}}" aria-label="Next">
+					</li>
+					<li class="page-item"><a class="page-link" href="#">{{ $date->format('Y年n月j日') }}</a></li>
+					<li class="page-item{{ !is_null($date_after) ? "" : " disabled" }}">
+						<a class="page-link" href="{{ !is_null($date_after) ? "schedule?date=".$date_after : "#" }}" aria-label="Next">
 							<span aria-hidden="true">&raquo;</span>
 						</a>
-					@else
-						<a class="page-link" href="#" aria-label="Next" aria-disabled="true">
-							<span aria-hidden="true">&raquo;</span>
-						</a>
-					@endif
-				</li>
+					</li>
 				</ul>
 			</nav> 
 		</div>
