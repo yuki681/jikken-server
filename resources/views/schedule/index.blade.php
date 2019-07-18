@@ -4,10 +4,10 @@
 @section('content')
 	<!--ヘッダ的なやつ-->
 	<div class="row">
-		<div class="col-8 align-self-center">
+		{{-- <div class="col-8 align-self-center">
 			<p class="h4" style="margin: 5px 0px 0px 0px">明石高専学生食堂システム</p>
-		</div>
-		<div class="col-4">
+		</div> --}}
+		<div class="col-12 align-self-center">
 			<nav aria-label="Page navigation example" style="margin: 0px 0px -16px 0px">
 				<ul class="pagination justify-content-center">
 				<li class="page-item">
