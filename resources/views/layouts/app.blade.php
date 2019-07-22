@@ -51,7 +51,7 @@
     <body>
         @section('sidebar')
             <nav class="navbar fixed-top navbar-dark bg-dark">
-                <a class="navbar-brand" href="/">明石高専学生食堂システム</a>
+                <a class="navbar-brand" href={{ url('/') }}>明石高専学生食堂システム</a>
             </nav>
         @show
 
