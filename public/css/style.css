@@ -2,6 +2,10 @@
 
 /****** Style Star Rating Widget *****/
 
+body { 
+  padding-top: 70px;
+}
+
 .rating {
   border: none;
   float: left;
