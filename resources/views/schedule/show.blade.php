@@ -35,28 +35,11 @@
     
     <!--ヘッダ的なやつ-->
     <div class="row">
-        {{-- <div class="col-8 align-self-center">
-            <!-- <p class="h4" style="margin: 5px 0px 0px 0px">明石高専学生食堂システム</p> -->
-        </div> --}}
-        <div class="col-12 align-self-cente">
-            <nav aria-label="Page navigation example" style="margin:0px 0px -16px 0px">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">{{ $schedule->date->format('Y年n月j日') }}</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav> 
+        <div class="col-12 text-center align-self-center">
+            <h5>{{ $schedule->date->format('Y年n月j日') }}</h5>
         </div>
     </div>
-    {{-- <hr color="black" style="margin:6px 0px 6px 0px"> --}}
+    
     <a href="{{ url ('/schedule/?date=' . $schedule->date->toDateString()) }}">メニュー一覧に戻る</a>
     <hr color="black" style="margin:6px 0px 6px 0px">
 

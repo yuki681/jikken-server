@@ -16,12 +16,11 @@
         <!--満足度の星--> 
         <link rel="stylesheet" href="{{asset('css/style.css')}}"> 
 
-        <script>
-        $( function() {
-            $( "#datepicker" ).datepicker();
-        } );
-        </script>
-
+        <!--  Jquery UI  -->
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script src="{{url('js/datepicker-ja.js')}}"></script>
+        
         <style>
             /*div {
                 border: 1px solid #000000;
@@ -52,7 +51,7 @@
     <body>
         @section('sidebar')
             <nav class="navbar fixed-top navbar-dark bg-dark">
-                <a class="navbar-brand" href="/">明石高専学生食堂システム</a>
+                <a class="navbar-brand" href={{ url('/') }}>明石高専学生食堂システム</a>
             </nav>
         @show
 

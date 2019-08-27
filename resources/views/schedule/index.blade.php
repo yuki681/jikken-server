@@ -4,9 +4,6 @@
 @section('content')
 	<!--ヘッダ的なやつ-->
 	<div class="row">
-		{{-- <div class="col-8 align-self-center">
-			<p class="h4" style="margin: 5px 0px 0px 0px">明石高専学生食堂システム</p>
-		</div> --}}
 		<div class="col-12 align-self-center">
 			<nav aria-label="Page navigation example" style="margin: 0px 0px -16px 0px">
 				<ul class="pagination justify-content-center">
@@ -15,17 +12,37 @@
 							<span aria-hidden="true">&laquo;</span>
 						</a>
 					</li>
-					<li class="page-item"><a class="page-link" href="#">{{ $date->format('Y年n月j日') }}</a></li>
+					<li class="page-item" style="text-align:center">
+						<a href="#" onclick="" class="page-link" id="showDatepicker" style="width:17em">{{ $date->format('Y年n月j日') }} <i class="fa fa-calendar" aria-hidden="true"></i></a>
+						<div id="datepicker"></div>
+					</li>
 					<li class="page-item{{ !is_null($date_after) ? "" : " disabled" }}">
 						<a class="page-link" href="{{ !is_null($date_after) ? "schedule?date=".$date_after : "#" }}" aria-label="Next">
 							<span aria-hidden="true">&raquo;</span>
 						</a>
 					</li>
 				</ul>
-			</nav> 
+			</nav>
 		</div>
 	</div>
 	<hr color="black" style="margin:6px 0px 6px 0px">
+
+	<script>
+        $( function() {
+			$.datepicker.setDefaults($.datepicker.regional["ja"]);
+			$("#datepicker").hide();
+			$("#showDatepicker").click(function(){
+    			$("#datepicker").toggle();
+			});		
+            $("#datepicker").datepicker({
+				dateFormat: "yy-mm-dd",
+				defaultDate: "{{ $date->toDateString() }}",
+				onSelect: function(selected_date){
+					window.location.href = "{{ url('/schedule/') }}" + "?date=" + selected_date;
+				},
+			});
+        } );
+    </script>
 
 	@if($menus->count() > 0)
 		@foreach($menus as $menu)
